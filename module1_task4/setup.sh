@@ -2,4 +2,4 @@ sudo su
 apt-get update
 apt-get install -y hugo
 apt-get install -y make curl
-hugo new site dist && cd dist && hugo -d .
+hugo new site dist && cd dist && hugo -d ./dist
