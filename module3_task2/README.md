@@ -10,3 +10,4 @@
 - #### help: Displays the command and their usage
 - #### build: Builds the website
 - #### post: Make a new post
+- #### unit-tests: lol
