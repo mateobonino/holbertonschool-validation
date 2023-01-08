@@ -3,11 +3,12 @@ on:
   schedule:
     - cron: '30 5, 17 * * *'
   push:
-    jobs:
-      deploy:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Clone the repo
-            uses: actions/checkout@v3
-          - name: Run the command make help
-            run: cd module3_task0 && make help
+    Explore-GitHub-Actions:
+      jobs:
+        deploy:
+          runs-on: ubuntu-latest
+          steps:
+            - name: Clone the repo
+              uses: actions/checkout@v3
+            - name: Run the command make help
+              run: cd module3_task0 && make help
