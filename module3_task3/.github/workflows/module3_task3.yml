@@ -39,6 +39,11 @@ jobs:
       - name: Validate
         working-directory: module3_task2
         run: make validate
+      - name: Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacttttt
+          path: module3_task3/
       - name: Make release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
