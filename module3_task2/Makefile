@@ -14,3 +14,5 @@ package: ## Zip the dist and api binary
 
 lint: ## Lints DEPLOY.md file
 	markdownlint --fix DEPLOY.md
+
+unit-tests: ## ERROR: No comment found for target unit-tests in ./Makefile
