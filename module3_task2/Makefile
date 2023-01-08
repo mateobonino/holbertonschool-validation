@@ -10,7 +10,7 @@ help: ## Display the list of commands
 	@sed -ne '/@sed/!s/## //p' ${MAKEFILE_LIST}
 
 package: ## Zip the dist and api binary
-	zip -r awesome-website.zip dist
+	zip -r awesome-website.zip . -i dist
 
 lint: ## Lints DEPLOY.md file
 	markdownlint --fix DEPLOY.md
