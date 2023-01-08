@@ -1,0 +1,21 @@
+name: module3_task1
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the repo
+        uses: actions/checokout@v3
+      - name: Run setup.sh
+        run: cd module3_task 1 && ./setup.sh
+      - name: Build the site
+        run: cd module3_task1 && make build
+      - name: Create a post
+        run: cd module3_task1 && make post POST_NAME=test POST_TITLE=thisisatest
+      - name: Call for help :3
+        run: cd module3_task1 && make help
+      - name: Clean the dist folder
+        run: cd module3_task1 && make clean
