@@ -38,5 +38,5 @@ jobs:
         run: make integration-tests
       - name: Validate
         working-directory: module3_task2
-        run: make integration-tests
+        run: make validate
 
