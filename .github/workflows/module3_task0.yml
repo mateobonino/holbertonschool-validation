@@ -1,0 +1,9 @@
+name: module3_task0
+on: push
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    name: Clone https://github.com/mateobonino/holbertonschool-validation
+    uses: actions/checkout@v3
+    name: Run the command make help
+    run: make help
