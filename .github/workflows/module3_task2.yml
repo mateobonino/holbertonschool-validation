@@ -30,4 +30,13 @@ jobs:
       - name: Make lint for README.md
         working-directory: module3_task2
         run: make lint
+      - name: Unit-tests
+        working-directory: module3_task2
+        run: make unit-tests
+      - name: Integration-tests
+        working-directory: module3_task2
+        run: make integration-tests
+      - name: Validate
+        working-directory: module3_task2
+        run: make integration-tests
 
