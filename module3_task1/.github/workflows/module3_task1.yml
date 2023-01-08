@@ -10,12 +10,17 @@ jobs:
       - name: Clone the repo
         uses: actions/checkout@v3
       - name: Run setup.sh
-        run: cd module3_task 1 && ./setup.sh
+        working-directory: module3_task1
+        run: ./setup.sh
       - name: Build the site
-        run: cd module3_task1 && make build
+        working-directory: module3_task1
+        run: make build
       - name: Create a post
-        run: cd module3_task1 && make post POST_NAME=test POST_TITLE=thisisatest
+        working-directory: module3_task1
+        run: make post POST_NAME=test POST_TITLE=thisisatest
       - name: Call for help :3
-        run: cd module3_task1 && make help
+        working-directory: module3_task1
+        run: make help
       - name: Clean the dist folder
-        run: cd module3_task1 && make clean
+        working-directory: module3_task1
+        run: make clean
