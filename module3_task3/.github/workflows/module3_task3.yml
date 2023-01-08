@@ -7,7 +7,7 @@ on:
       - "v*.*.*"
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - name: Clone the repo
         uses: actions/checkout@v3
