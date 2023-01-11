@@ -2,11 +2,10 @@ name: module4_task0
 on:
   schedule:
     - cron: "0 0 * * *"
-  push:
-    tags:
-      - "v*.*.*"
   pull_request:
     types: [opened, reopened]
+  push:
+
 jobs:
   deploy:
     runs-on: ubuntu-18.04
