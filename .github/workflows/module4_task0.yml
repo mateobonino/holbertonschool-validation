@@ -1,0 +1,71 @@
+name: module4_task0
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+    tags:
+      - "v*.*.*"
+  pull_request:
+    types: [opened, reopened]
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Clone the repo
+        uses: actions/checkout@v3
+      - name: Run the setup
+        working-directory: module3_task4
+        run: sudo ./setup.sh
+      - name: Build the site
+        working-directory: module3_task4
+        run: make build
+      - name: Make a new post
+        working-directory: module3_task4
+        run: make post POST_NAME=kanyewestlover911 POST_TITLE="find god"
+      - name: Find some help
+        working-directory: module3_task4
+        run: make help
+      - name: Clean the site
+        working-directory: module3_task4
+        run: make clean
+      - name: Make the zip files
+        working-directory: module3_task4
+        run: make package
+      - name: Make lint for README.md
+        working-directory: module3_task4
+        run: make lint
+      - name: Unit-tests
+        working-directory: module3_task4
+        run: make unit-tests
+      - name: Integration-tests
+        working-directory: module3_task4
+        run: make integration-tests
+      - name: Validate
+        working-directory: module3_task4
+        run: make validate
+      - name: Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: task4-arti
+          path: module3_task4/
+      - name: Make release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            module3_task4/DEPLOY.md
+            module3_task4/awesome-website.zip
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: './module3_task5/dist'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ 8S_sJcfVIB16x0OMdPtomo1XqoE4Fi0IW6k5Lc7E56A }}
+          NETLIFY_SITE_ID: ${{ 7819476c-eaa3-439d-a444-6b0f32c328e7 }}
+        timeout-minutes: 1
