@@ -12,51 +12,51 @@ jobs:
       - name: Clone the repo
         uses: actions/checkout@v3
       - name: Run the setup
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: sudo ./setup.sh
       - name: Build the site
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make build
       - name: Make a new post
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make post POST_NAME=kanyewestlover911 POST_TITLE="find god"
       - name: Find some help
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make help
       - name: Clean the site
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make clean
       - name: Make the zip files
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make package
       - name: Make lint for README.md
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make lint
       - name: Unit-tests
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make unit-tests
       - name: Integration-tests
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make integration-tests
       - name: Validate
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make validate
       - name: Artifact
         uses: actions/upload-artifact@v3
         with:
           name: task4-arti
-          path: module3_task4/
+          path: module4_task40/
       - name: Make release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            module3_task4/DEPLOY.md
-            module3_task4/awesome-website.zip
+            module4_task0/DEPLOY.md
+            module4_task0/awesome-website.zip
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: './module3_task5/dist'
+          publish-dir: './module4_task0/dist'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
@@ -67,3 +67,15 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_ID }}
         timeout-minutes: 1
+      - name: Create docker container
+        run: docker run golang:1.15.8-buster go version
+      - name: Get the container id
+        run: CONT_ID=$(docker ps | cut -d $'\n' -f 2 | cut -d ' ' -f 1)
+      - name: Copy the folder with the files to the container
+        run: docker cp . $CONT_ID:/
+      - name: Create a file and build the go site
+        run: |
+          docker run golang:1.15.8-buster touch mysite.go
+          echo -e "package mysite \n func Hello() string {\n\t return 'This is a test'\n}" > mysite.go
+          docker run golang:.16.8-buster go build
+  
