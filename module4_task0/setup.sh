@@ -1,7 +1,9 @@
-command = command -v go > /dev/null 2>&1
-if [ command ]
+if [ -d "/usr/bin/go"]
 then
     rm -fr /usr/bin/go
+elif [ -d "/usr/local/go"]
+then
+    rm -fr /usr/local/go
 fi
 apt-get update
 apt-get install -y npm zip hugo
