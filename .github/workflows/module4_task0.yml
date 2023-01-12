@@ -12,4 +12,8 @@ jobs:
       - name: Clone the repo
         uses: actions/checkout@v3
       - name: Test docker
-        run: docker run golang:1.15.8-buster ls
+        run: | 
+          docker container create -it --name mycontainer golang:1.15.8-buster
+          docker container start --attach -i mycontainer
+          ls
+        
