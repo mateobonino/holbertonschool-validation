@@ -14,6 +14,5 @@ jobs:
       - name: Test docker
         run: | 
           docker container create -it --name mycontainer golang:1.15.8-buster
-          docker container start --attach -i mycontainer
-          ls
+          docker run --name mycontainer ls
         
