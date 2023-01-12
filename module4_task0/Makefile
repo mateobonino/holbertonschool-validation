@@ -1,7 +1,7 @@
 clean: ## Clean the dist folder
 	rm -fr ./dist
 build: ## Build the website
-	hugo > /dev/null 2>$1
+	hugo > /dev/null 2>&1
 	touch awesome-api
 
 post: ## Make a new post
