@@ -30,6 +30,7 @@ jobs:
           make build
           make package
           make clean
+          rm -fr ./dist
       - name: Artifact
         uses: actions/upload-artifact@v3
         with:
