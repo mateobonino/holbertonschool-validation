@@ -12,47 +12,47 @@ jobs:
       - name: Clone the repo
         uses: actions/checkout@v3
       - name: Run the setup
-        working-directory: module4_task0
+        working-directory: module3_task4
         run: sudo ./setup.sh
       - name: Build the site
-        working-directory: module4_task0
+        working-directory: module3_task4
         run: make build
       - name: Make a new post
-        working-directory: module4_task0
+        working-directory: module3_task4
         run: make post POST_NAME=kanyewestlover911 POST_TITLE="find god"
       - name: Find some help
-        working-directory: module4_task0
+        working-directory: module3_task4
         run: make help
       - name: Clean the site
-        working-directory: module4_task0
+        working-directory: module3_task4
         run: make clean
       - name: Make the zip files
-        working-directory: module4_task0
+        working-directory: module3_task4
         run: make package
       - name: Make lint for README.md
-        working-directory: module4_task0
+        working-directory: module3_task4
         run: make lint
       - name: Unit-tests
-        working-directory: module4_task0
+        working-directory: module3_task4
         run: make unit-tests
       - name: Integration-tests
-        working-directory: module4_task0
+        working-directory: module3_task4
         run: make integration-tests
       - name: Validate
-        working-directory: module4_task0
+        working-directory: module3_task4
         run: make validate
       - name: Artifact
         uses: actions/upload-artifact@v3
         with:
           name: task4-arti
-          path: module4_task40/
+          path: module3_task4/
       - name: Make release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            module4_task0/DEPLOY.md
-            module4_task0/awesome-website.zip
+            module3_task4/DEPLOY.md
+            module3_task4/awesome-website.zip
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
