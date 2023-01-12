@@ -1,8 +1,15 @@
 clean: ## Clean the dist folder
 	rm -fr ./dist
 build: ## Build the website
-	hugo > /dev/null 2>&1
-	zip -r awesome-website.zip . -i dist
+	RESULT := $(shell which go)
+	ifeq ($RESULT, "/usr/bin/go")
+		go mod init mysite.com
+		touch mysite.go
+		go build
+	else
+		hugo > /dev/null 2>$1
+	touch awesome-api
+
 post: ## Make a new post
 	hugo new posts/${POST_NAME}.md
 	sed -i '/title/c\title: "${POST_TITLE}"' content/posts/${POST_NAME}.md
