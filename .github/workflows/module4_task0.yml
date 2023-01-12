@@ -68,14 +68,8 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_ID }}
         timeout-minutes: 1
       - name: Create docker container
-        run: docker run golang:1.15.8-buster go version
-      - name: Get the container id
-        run: CONT_ID=$(docker ps | cut -d $'\n' -f 2 | cut -d ' ' -f 1)
-      - name: Copy the folder with the files to the container
-        run: docker cp . $CONT_ID:/
-      - name: Create a file and build the go site
         run: |
-          docker run golang:1.15.8-buster touch mysite.go
-          echo -e "package mysite \n func Hello() string {\n\t return 'This is a test'\n}" > mysite.go
-          docker run golang:.16.8-buster go build
+          docker container create -i -t --name gocontainer golang:1.15.7-buster
+          docker container start --attach -i gocontainer
+          docker ps
   
