@@ -67,14 +67,3 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_ID }}
         timeout-minutes: 1
-      - name: Create go image with docker
-        run: docker run golang:1.15.8-buster go mod init mysite.com
-      - name: Get the container ID
-        env:
-          CONTAINER_ID: |
-            run: docker ps | cut -d $'\n' -f 2 | cut -d ' ' -f 1|
-      - name: Copy the go files into the container
-        run: |
-          docker cp go.mod ${{ CONTAINER_ID }}:/go
-          docker cp mysite.go ${{ CONTAINER_ID }}:/go
-          docker run golang:1.15.8-buster go build
