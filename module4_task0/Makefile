@@ -1,13 +1,7 @@
 clean: ## Clean the dist folder
 	rm -fr ./dist
 build: ## Build the website
-	RESULT := $(shell which go)
-	ifeq ($RESULT, "/usr/bin/go")
-		go mod init mysite.com
-		touch mysite.go
-		go build
-	else
-		hugo > /dev/null 2>$1
+	hugo > /dev/null 2>$1
 	touch awesome-api
 
 post: ## Make a new post
