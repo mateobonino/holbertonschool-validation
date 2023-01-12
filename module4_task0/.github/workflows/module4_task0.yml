@@ -8,51 +8,39 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-18.04
+    container: golang:1.15.8-buster
     steps:
-      - name: Clone the repo
+      - name: Checkout
         uses: actions/checkout@v3
-      - name: Run the setup
-        working-directory: module3_task4
-        run: sudo ./setup.sh
-      - name: Build the site
-        working-directory: module3_task4
-        run: make build
-      - name: Make a new post
-        working-directory: module3_task4
-        run: make post POST_NAME=kanyewestlover911 POST_TITLE="find god"
-      - name: Find some help
-        working-directory: module3_task4
-        run: make help
-      - name: Clean the site
-        working-directory: module3_task4
-        run: make clean
-      - name: Make the zip files
-        working-directory: module3_task4
-        run: make package
-      - name: Make lint for README.md
-        working-directory: module3_task4
-        run: make lint
-      - name: Unit-tests
-        working-directory: module3_task4
-        run: make unit-tests
-      - name: Integration-tests
-        working-directory: module3_task4
-        run: make integration-tests
-      - name: Validate
-        working-directory: module3_task4
-        run: make validate
+      - name: Setup node
+        uses: actions/setup-node@v3
+      - name: Run setup
+        working-directory: module4_task0
+        run: ./setup.sh
+      - name: Install markdown
+        run: npm install -g markdownlint-cli
+      - name: Run makefile commands
+        working-directory: module4_task0
+        run: |
+          make help
+          make unit-tests
+          make integration-tests
+          make post POST_NAME=kanyewestlover911 POST_TITLE="find god"
+          make validate
+          make build
+          make package
       - name: Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: task4-arti
-          path: module3_task4/
+          name: task0-arti
+          path: module4_task0/
       - name: Make release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            module3_task4/DEPLOY.md
-            module3_task4/awesome-website.zip
+            module4_task0/DEPLOY.md
+            module4_task0/awesome-website.zip
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
