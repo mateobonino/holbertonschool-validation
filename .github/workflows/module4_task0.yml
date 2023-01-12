@@ -23,31 +23,31 @@ jobs:
         working-directory: module4_task0
         run: ./setup.sh
       - name: Build the site
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make build
       - name: Make a new post
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make post POST_NAME=kanyewestlover911 POST_TITLE="find god"
       - name: Find some help
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make help
       - name: Clean the site
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make clean
       - name: Make the zip files
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make package
       - name: Make lint for README.md
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make lint
       - name: Unit-tests
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make unit-tests
       - name: Integration-tests
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make integration-tests
       - name: Validate
-        working-directory: module3_task4
+        working-directory: module4_task0
         run: make validate
       - name: Artifact
         uses: actions/upload-artifact@v3
