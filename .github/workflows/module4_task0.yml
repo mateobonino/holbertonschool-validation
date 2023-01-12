@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Run the setup
         working-directory: module3_task4
-        run: sudo ./setup.sh
+        run: ./setup.sh
       - name: Build the site
         working-directory: module3_task4
         run: make build
