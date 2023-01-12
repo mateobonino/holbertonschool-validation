@@ -1,4 +1,8 @@
 FROM golang:1.15.8-buster
-WORKDIR /
-COPY . /.
-RUN ./setup.sh
+
+WORKDIR /app
+
+COPY docker/* ./app
+
+RUN ls
+
