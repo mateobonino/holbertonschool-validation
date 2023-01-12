@@ -15,7 +15,7 @@ package: ## Zip the dist and api binary
 	zip -r awesome-website.zip . -i dist
 
 lint: ## Lints DEPLOY.md file
-	markdownlint -fix DEPLOY.md
+	markdownlint --fix DEPLOY.md
 
 unit-tests: ## ERROR: No comment found for target unit-tests in ./Makefile
 	echo OK
