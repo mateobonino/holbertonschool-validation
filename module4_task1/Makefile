@@ -26,4 +26,5 @@ validate: ## ERROR: No comment found for target validate in ./Makefile
 	echo OK
 
 build-docker: ## Builds a docker image
-	cd docker && docker build -t awesome:build .
+	docker build --no-cache -t awesome:build -f ./docker/Dockerfile .
+	docker run awesome:build go version
