@@ -1,4 +1,4 @@
-name: module4_task0
+name: module4_task1
 on:
   schedule:
     - cron: "0 0 * * *"
@@ -8,39 +8,37 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-18.04
-    container: golang:1.15.8-buster
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup node
         uses: actions/setup-node@v3
-      - name: Run setup
-        working-directory: module4_task0
-        run: ./setup.sh
-      - name: Install markdown
-        run: npm install -g markdownlint-cli
-      - name: Run makefile commands
-        working-directory: module4_task0
-        run: |
-          make help
-          make unit-tests
-          make integration-tests
-          make post POST_NAME=kanyewestlover911 POST_TITLE="find god"
-          make validate
-          make build
-          make package
+      - name: Build docker image
+        working-directory: module4_task1
+        run: make build-docker
+      - name: Try some commands on the docker container
+        run: | 
+          docker run awesome:build go help
+          docker run awesome:build make integration-tests
+          docker run awesome:build make unit-tests
+          docker run awesome:build make build
+          docker run awesome:build make package
+          docker run awesome:build make help
+          docker run awesome:build make validate
+          docker run awesome:build make post POST_NAME=papucho POST_TITLE=papulince
+          
       - name: Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: task0-arti
+          name: task1-arti
           path: module4_task0/
       - name: Make release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            module4_task0/DEPLOY.md
-            module4_task0/awesome-website.zip
+            module4_task1/DEPLOY.md
+            module4_task1/awesome-website.zip
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
