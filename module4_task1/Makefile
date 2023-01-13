@@ -23,7 +23,6 @@ unit-tests: ## ERROR: No comment found for target unit-tests in ./Makefile
 integration-tests: ## ERROR: No comment found for target integration-tests in ./Makefile
 	touch coverage-integrations.out
 validate: ## ERROR: No comment found for target validate in ./Makefile
-	echo OK
 
 build-docker: ## Builds a docker image
 	docker build --no-cache -t awesome:build -f ./docker/Dockerfile .
