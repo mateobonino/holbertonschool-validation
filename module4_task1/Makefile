@@ -9,7 +9,7 @@ post: ## Make a new post
 	sed -i '/title/c\title: "${POST_TITLE}"' content/posts/${POST_NAME}.md
 
 help: ## Display the list of commands
-	docker run awesome:build sed -ne '/@sed/!s/## //p' ${MAKEFILE_LIST}
+	sed -ne '/@sed/!s/## //p' ${MAKEFILE_LIST}
 
 package: ## Zip the dist and api binary
 	docker run awesome:build zip -r awesome-website.zip . -i dist
