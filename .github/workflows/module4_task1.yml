@@ -11,9 +11,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
       - name: Build docker image and run
         working-directory: module4_task1
         run: make build-docker
+      - name: Run commands
+        run: |
+          docker run awesome:build make build
+          docker run awesome:build make clean
+          docker run awesome:build make lint
+          docker run awesome:build make unit-tests
+          docker run awesome:build make integration-tests
       - name: Artifact
         uses: actions/upload-artifact@v3
         with:
