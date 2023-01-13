@@ -26,6 +26,7 @@ jobs:
           docker run awesome:build make help
           docker run awesome:build make validate
           docker run awesome:build make post POST_NAME=papucho POST_TITLE=papulince
+          docker run awesome:build make lint
           
       - name: Artifact
         uses: actions/upload-artifact@v3
