@@ -4,17 +4,7 @@ WORKDIR /app
 
 COPY ./ /app/
 
-RUN apt-get update -y
-
-RUN apt-get install -y npm wget curl zip
-
-RUN curl -s https://deb.nodesource.com/setup_16.x | bash
-
-RUN apt-get install nodejs -y
-
-RUN npm install -g markdownlint-cli
-
-RUN npm install markdownlint
+RUN ./setup.sh
 
 RUN wget https://github.com/gohugoio/hugo/releases/download/v0.79.0/hugo_0.79.0_Linux-64bit.deb
 
