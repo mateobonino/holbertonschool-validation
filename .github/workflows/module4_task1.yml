@@ -13,5 +13,45 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Check docker version
-        run: ls
+      - name: Setup node
+        uses: actions/setup-node@v3
+      - name: Build docker image
+        working-directory: module4_task1
+        run: make build-docker
+      - name: Try some commands on the docker container
+        run: | 
+          docker run awesome:build go help
+          docker run awesome:build make integration-tests
+          docker run awesome:build make unit-tests
+          docker run awesome:build make build
+          docker run awesome:build make package
+          docker run awesome:build make help
+          docker run awesome:build make validate
+          docker run awesome:build make post POST_NAME=papucho POST_TITLE=papulince
+          
+      - name: Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: task1-arti
+          path: module4_task0/
+      - name: Make release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            module4_task1/DEPLOY.md
+            module4_task1/awesome-website.zip
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: './module3_task5/dist'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_ID }}
+        timeout-minutes: 1
