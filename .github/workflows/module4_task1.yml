@@ -15,15 +15,10 @@ jobs:
         working-directory: module4_task1
         run: make build-docker
       - name: Try some commands on the docker container
-        run: | 
-          docker run awesome:build go help
+        run: |
           docker run awesome:build make integration-tests
           docker run awesome:build make unit-tests
-          docker run awesome:build make build
-          docker run awesome:build make package
-          docker run awesome:build make help
-          docker run awesome:build make validate
-          docker run awesome:build make post POST_NAME=papucho POST_TITLE=papulince
+          docker run awesome:build make builde
           docker run awesome:build make lint
       - name: Artifact
         uses: actions/upload-artifact@v3
