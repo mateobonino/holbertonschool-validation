@@ -19,11 +19,11 @@ jobs:
       - name: Run commands
         working-directory: module4_task1
         run: |
-          docker run -i awesome:build sh -c "make build"
-          docker run -i awesome:build sh -c "make clean"
-          docker run -i awesome:build sh -c "make lint"
-          docker run -i awesome:build sh -c "make unit-tests"
-          docker run -i awesome:build sh -c "make integration-tests"
+          docker run --mount type=volume,src=myvolume,target=/app awesome:build make build
+          docker run --mount type=volume,src=myvolume,target=/app awesome:build make clean
+          docker run --mount type=volume,src=myvolume,target=/app awesome:build make lint
+          docker run --mount type=volume,src=myvolume,target=/app awesome:build make unit-tests
+          docker run --mount type=volume,src=myvolume,target=/app awesome:build make integration-tests
       - name: Artifact
         uses: actions/upload-artifact@v3
         with:
