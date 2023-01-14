@@ -27,6 +27,7 @@ integration-tests: ## ERROR: No comment found for target integration-tests in ./
 validate: ## ERROR: No comment found for target validate in ./Makefile
 
 build-docker: ## Builds a docker image
+	docker volume create myvolume
 	docker build -t awesome:build -f ./build/Dockerfile .
 	docker run awesome:build go version
 
