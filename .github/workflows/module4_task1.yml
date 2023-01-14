@@ -22,8 +22,8 @@ jobs:
       - name: Run commands
         working-directory: module4_task1
         run: |
-          make clean
           make build
+          make clean
           make lint
           make unit-tests
           make integration-tests
