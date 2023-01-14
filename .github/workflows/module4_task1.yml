@@ -13,9 +13,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup node
         uses: actions/setup-node@v3
-      - name: Install
-        working-directory: module4_task1
-        run: ./setup.sh
       - name: Build docker image and run
         working-directory: module4_task1
         run: make build-docker
