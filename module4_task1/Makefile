@@ -1,9 +1,10 @@
+.PHONY: build
+
 clean: ## Clean the dist folder
 	docker run awesome:build rm -fr ./dist
-	rm -fr ./dist
 build: ## Build the website
-	docker run awesome:build hugo > /dev/null 2>&1
-	docker run awesome:build touch awesome-api
+	hugo > /dev/null 2>&1
+	touch awesome-api
 
 post: ## Make a new post
 	hugo new posts/${POST_NAME}.md

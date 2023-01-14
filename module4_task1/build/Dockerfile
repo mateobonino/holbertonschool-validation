@@ -14,3 +14,12 @@ RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/i
 
 RUN npm install -g markdownlint-cli
 
+RUN make build
+
+RUN make clean
+
+RUN make unit-tests
+
+RUN make integration-tests
+
+RUN make lint
