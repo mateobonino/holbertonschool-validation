@@ -3,8 +3,8 @@
 clean: ## Clean the dist folder
 	rm -fr ./dist
 build: ## Build the website
-	hugo > /dev/null 2>&1
-	touch awesome-api
+	docker run -i awesome:build sh -c "hugo > /dev/null 2>&1"
+	docker run -i awesome:build sh -c "touch awesome-api"
 
 post: ## Make a new post
 	hugo new posts/${POST_NAME}.md
@@ -17,13 +17,13 @@ package: ## Zip the dist and api binary
 	docker run awesome:build zip -r awesome-website.zip . -i dist
 
 lint: ## Lints DEPLOY.md file
-	markdownlint --fix DEPLOY.md
+	docker run -i awesome:build sh -c "markdownlint --fix DEPLOY.md"
 
 unit-tests: ## ERROR: No comment found for target unit-tests in ./Makefile
-	touch coverage-units.out
+	docker run -i awesome:build sh -c "touch coverage-units.out"
 
 integration-tests: ## ERROR: No comment found for target integration-tests in ./Makefile
-	touch coverage-integrations.out
+	docker run -i awesome:build sh -c "touch coverage-integrations.out"
 validate: ## ERROR: No comment found for target validate in ./Makefile
 
 build-docker: ## Builds a docker image
