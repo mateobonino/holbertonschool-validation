@@ -1,7 +1,7 @@
 .PHONY: build
 
 clean: ## Clean the dist folder
-	docker run awesome:build rm -fr ./dist
+	rm -fr ./dist
 build: ## Build the website
 	hugo > /dev/null 2>&1
 	touch awesome-api
@@ -17,14 +17,12 @@ package: ## Zip the dist and api binary
 	docker run awesome:build zip -r awesome-website.zip . -i dist
 
 lint: ## Lints DEPLOY.md file
-	docker run awesome:build markdownlint --fix DEPLOY.md
+	markdownlint --fix DEPLOY.md
 
 unit-tests: ## ERROR: No comment found for target unit-tests in ./Makefile
-	docker run awesome:build touch coverage-units.out
 	touch coverage-units.out
 
 integration-tests: ## ERROR: No comment found for target integration-tests in ./Makefile
-	docker run awesome:build touch coverage-integrations.out
 	touch coverage-integrations.out
 validate: ## ERROR: No comment found for target validate in ./Makefile
 
