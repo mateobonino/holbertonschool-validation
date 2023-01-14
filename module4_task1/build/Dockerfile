@@ -18,8 +18,8 @@ RUN make build
 
 RUN make clean
 
+RUN make lint
+
 RUN make unit-tests
 
 RUN make integration-tests
-
-RUN make lint
