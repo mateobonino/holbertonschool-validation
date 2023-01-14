@@ -23,7 +23,7 @@ jobs:
           docker run -i awesome:build sh -c "make clean"
           docker run -i awesome:build sh -c "make lint"
           docker run -i awesome:build sh -c "make unit-tests"
-          docker run -i awesome:build sh -c :make integration-tests
+          docker run -i awesome:build sh -c "make integration-tests"
       - name: Artifact
         uses: actions/upload-artifact@v3
         with:
