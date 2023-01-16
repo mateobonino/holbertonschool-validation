@@ -1,0 +1,8 @@
+all:
+  hosts:
+    children:
+      jenkins:
+        ansible_host: 192.168.0.11
+        ansible_host: 127.0.0.1
+      production:
+        ansible_host: 0.0.0.0
